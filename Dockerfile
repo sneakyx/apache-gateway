@@ -17,6 +17,7 @@ COPY docker-entrypoint.sh /entrypoint.sh
 COPY apache.conf /etc/apache2/apache2.conf
 # COPY assets/apache-with*.conf /etc/apache2/sites-available/
 RUN mkdir --parents /var/keys/
+RUN mkdir --parents /var/log/apache2/
 RUN chmod +x /entrypoint.sh  
 
 EXPOSE 80 443
