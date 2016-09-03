@@ -2,8 +2,9 @@
 set -e
 # made by sneaky of Rothaar Systems (Andre Scholz)
 # V2016-09-03-15-45
+touch /etc/apache2/sites-available/000-default.conf
 
-if [ $1 != "" ]; then
+if [ -z $1 ]; then
 
 	# Apache gets grumpy about PID files pre-existing
 	rm -f /var/run/apache2/apache2.pid
