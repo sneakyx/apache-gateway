@@ -6,10 +6,7 @@ echo "<VirtualHost *:80>" > /etc/apache2/000-default.conf
 echo "ServerAdmin webmaster@localhost" >> /etc/apache2/000-default.conf
 echo "DocumentRoot /var/www/html" >> /etc/apache2/000-default.conf
 echo "</VirtualHost>" >> /etc/apache2/000-default.conf
-echo "Action"
-echo $ACTION
-echo "Host"
-echo $HOST_NAME
+
 if [ $ACTION  == "installcert" ]; then
         if [ -z $HOST_NAME ]; then
                 echo "Host is missing"
@@ -56,6 +53,12 @@ if [ $ACTION == "renew" ]; then
         a2ensite apache-with-ssl
         service apache2 stop
 fi # registration should be updated
+
+if [ $ACTION == "only_activate" ]; then
+        a2dissite 000-default.conf  
+        a2ensite apache-without-ssl    
+	    a2ensite apache-with-ssl
+fi # only activate ssl
 
 rm -f /var/run/apache2/apache2.pid
 exec apache2 -DFOREGROUND
