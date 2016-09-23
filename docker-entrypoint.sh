@@ -1,13 +1,15 @@
 #!/bin/bash
 set -e
 # made by sneaky of Rothaar Systems (Andre Scholz)
-# V2016-09-03-15-45
+# V2016-09-24-00-50
 echo "<VirtualHost *:80>" > /etc/apache2/000-default.conf
 echo "ServerAdmin webmaster@localhost" >> /etc/apache2/000-default.conf
 echo "DocumentRoot /var/www/html" >> /etc/apache2/000-default.conf
 echo "</VirtualHost>" >> /etc/apache2/000-default.conf
-
-if [ $ACTION  == "installcert" ]; then
+echo "Action: "
+echo "$ACTION"
+case "$ACTION" in
+	installcert)
         if [ -z $HOST_NAME ]; then
                 echo "Host is missing"
                 exit 1
@@ -31,9 +33,9 @@ if [ $ACTION  == "installcert" ]; then
         #--reloadcmd  "service apache2 reload"
         a2ensite apache-with-ssl
         service apache2 stop
-fi # if there should be something (new) registered      
-
-if [ $ACTION == "renew" ]; then
+	;;      
+	
+	renew)
         if [ -z $HOST_NAME ]; then
                 echo "Host is missing" 
                 exit 1
@@ -52,13 +54,14 @@ if [ $ACTION == "renew" ]; then
         
         a2ensite apache-with-ssl
         service apache2 stop
-fi # registration should be updated
-
-if [ $ACTION == "only_activate" ]; then
+	;;
+	
+	*)
         a2dissite 000-default.conf  
         a2ensite apache-without-ssl    
 	    a2ensite apache-with-ssl
-fi # only activate ssl
+	;;
+esac
 
 rm -f /var/run/apache2/apache2.pid
 exec apache2 -DFOREGROUND

@@ -1,6 +1,6 @@
 FROM php:5.6-apache
 MAINTAINER André Scholz <info@rothaarsystems.de>
-# Version 2016-09-24
+# Version 2016-09-24-00-50
 
 ENV DEBIAN_FRONTEND noninteractive
 ARG HOST_NAME=""
