@@ -48,7 +48,7 @@ case "$ACTION" in
         cd /root
         curl https://raw.githubusercontent.com/Neilpang/acme.sh/master/acme.sh >acme.sh
         chmod +x ./acme.sh
-        acme.sh --renew  -d  $HOST_NAME --force
+        ./acme.sh --renew  -d  $HOST_NAME --force
         a2dissite 000-default.conf  
         a2ensite apache-without-ssl    
         
