@@ -1,6 +1,6 @@
 FROM php:5.6-apache
 MAINTAINER André Scholz <info@rothaarsystems.de>
-# Version 2016-12-28-12-00
+# Version 2017-03-06-17-45
 
 ENV DEBIAN_FRONTEND noninteractive
 ARG HOST_NAME=""
@@ -13,8 +13,7 @@ RUN touch /usr/local/etc/php/conf.d/uploads.ini \
 
 RUN a2enmod proxy_http proxy_ajp proxy_balancer rewrite headers ssl
 
-RUN mkdir --parents /var/keys/
-RUN mkdir --parents /var/log/apache2/
+RUN mkdir --parents /var/keys/ /var/log/apache2/ /root/.acme.sh/
 
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY apache.conf /etc/apache2/apache2.conf

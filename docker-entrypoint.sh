@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 # made by sneaky of Rothaar Systems (Andre Scholz)
-# V2016-09-24-00-50
+
+# V2017-03-06-17-45
 echo "<VirtualHost *:80>" > /etc/apache2/000-default.conf
 echo "ServerAdmin webmaster@localhost" >> /etc/apache2/000-default.conf
 echo "DocumentRoot /var/www/html" >> /etc/apache2/000-default.conf
