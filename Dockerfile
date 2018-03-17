@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ARG HOST_NAME=""
 ARG ACTION=""
 RUN apt-get update \
-        && apt-get install -y wget bzip2 zlib1g-dev re2c libmcrypt-dev pwgen dnsutils
+        && apt-get install -y wget bzip2 zlib1g-dev re2c libmcrypt-dev pwgen dnsutils socat
 RUN touch /usr/local/etc/php/conf.d/uploads.ini \
     && echo date.timezone = $egr_timezone  >> /usr/local/etc/php/conf.d/uploads.ini \
     && echo session.save_path = /var/tmp  >> /usr/local/etc/php/conf.d/uploads.ini
