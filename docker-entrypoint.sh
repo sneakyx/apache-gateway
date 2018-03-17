@@ -18,12 +18,12 @@ case "$ACTION" in
 
         # Apache gets grumpy about PID files pre-existing
         rm -f /var/run/apache2/apache2.pid
-        service apache2 start
+        #service apache2 start
         mkdir --parents /var/keys/$HOST_NAME
         cd /root
         curl https://raw.githubusercontent.com/Neilpang/acme.sh/master/acme.sh >acme.sh
         chmod +x ./acme.sh
-        ./acme.sh --issue --debug 2 -d $HOST_NAME -w /var/www/html/
+        ./acme.sh --issue --standalone --debug 2 -d $HOST_NAME -w /var/www/html/
         a2dissite 000-default.conf
         a2ensite apache-without-ssl 
         ./acme.sh --installcert -d $HOST_NAME \
@@ -33,7 +33,7 @@ case "$ACTION" in
         --fullchainpath /var/keys/$HOST_NAME/fullchain.cer 
         #--reloadcmd  "service apache2 reload"
         a2ensite apache-with-ssl
-        service apache2 stop
+        #service apache2 stop
 	;;      
 	
 	renew)
