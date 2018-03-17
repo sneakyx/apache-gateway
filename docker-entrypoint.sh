@@ -23,7 +23,7 @@ case "$ACTION" in
         cd /root
         curl https://raw.githubusercontent.com/Neilpang/acme.sh/master/acme.sh >acme.sh
         chmod +x ./acme.sh
-        ./acme.sh --issue --standalone --debug 2 -d $HOST_NAME -w /var/www/html/
+        ./acme.sh --issue --standalone --debug 2 -d $HOST_NAME
         a2dissite 000-default.conf
         a2ensite apache-without-ssl 
         ./acme.sh --installcert -d $HOST_NAME \
@@ -49,7 +49,7 @@ case "$ACTION" in
         cd /root
         curl https://raw.githubusercontent.com/Neilpang/acme.sh/master/acme.sh >acme.sh
         chmod +x ./acme.sh
-        ./acme.sh --renew --debug 2 -d  $HOST_NAME --force
+        ./acme.sh --renew -d  $HOST_NAME --force
         a2dissite 000-default.conf  
         a2ensite apache-without-ssl    
         
