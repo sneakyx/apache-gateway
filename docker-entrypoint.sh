@@ -41,15 +41,15 @@ case "$ACTION" in
                 echo "Host is missing" 
                 exit 1
         fi # second parameter is missing
-        # this is not tested yet!
+       
         # Apache gets grumpy about PID files pre-existing
         rm -f /var/run/apache2/apache2.pid
-        service apache2 start
+        # service apache2 start
         mkdir --parents /var/keys/$HOST_NAME
         cd /root
         curl https://raw.githubusercontent.com/Neilpang/acme.sh/master/acme.sh >acme.sh
         chmod +x ./acme.sh
-        ./acme.sh --renew --log -d  $HOST_NAME --force
+        ./acme.sh --renew --log -d  $HOST_NAME --force --standalone
         a2dissite 000-default.conf  
         a2ensite apache-without-ssl    
         
