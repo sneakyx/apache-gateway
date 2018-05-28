@@ -2,7 +2,7 @@
 set -e
 # made by sneaky of Rothaar Systems (Andre Scholz)
 
-# V2017-03-06-17-45
+# V2018-05-28-07-30
 echo "<VirtualHost *:80>" > /etc/apache2/000-default.conf
 echo "ServerAdmin webmaster@localhost" >> /etc/apache2/000-default.conf
 echo "DocumentRoot /var/www/html" >> /etc/apache2/000-default.conf
@@ -23,7 +23,7 @@ case "$ACTION" in
         cd /root
         curl https://raw.githubusercontent.com/Neilpang/acme.sh/master/acme.sh >acme.sh
         chmod +x ./acme.sh
-        ./acme.sh --issue --standalone --log --debug 2 -d $HOST_NAME
+        ./acme.sh --issue --standalone --force --log --debug 2 -d $HOST_NAME
         a2dissite 000-default.conf
         a2ensite apache-without-ssl 
         ./acme.sh --installcert -d $HOST_NAME \
